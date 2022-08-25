@@ -3,7 +3,7 @@ module github.com/milobella/ability-media
 go 1.19
 
 require (
-	github.com/jrudio/go-plex-client v0.0.0-20220311213231-c211f79c0ee0
+	github.com/jrudio/go-plex-client v0.0.0-20220428052413-e5b4386beb17
 	github.com/milobella/ability-sdk-go v0.8.0
 )
 
