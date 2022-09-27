@@ -5,6 +5,7 @@ import (
 	"github.com/milobella/ability-sdk-go/pkg/config"
 	"github.com/milobella/ability-sdk-go/pkg/model"
 	"github.com/milobella/ability-sdk-go/pkg/server"
+	"github.com/milobella/ability-sdk-go/pkg/server/conditions"
 	"github.com/milobella/ability-sdk-go/pkg/server/interpreters"
 )
 
@@ -25,11 +26,11 @@ func main() {
 
 	// Register first the conditions on actions because they have priority on intents.
 	// The condition returns true if an action is pending.
-	srv.Register(server.IfInSlotFilling(playMediaAction), handlePlayMedia(confExt.Plex))
+	srv.Register(conditions.IfInSlotFilling(playMediaAction), handlePlayMedia(confExt.Plex))
 
 	// Then we register intents routing rules.
 	// It means that if no pending action has been found in the context, we'll use intent to decide the handler.
-	srv.Register(server.IfIntents("PLAY_MOVIE", "PLAY_SERIES"), handlePlayMedia(confExt.Plex))
+	srv.Register(conditions.IfIntents("PLAY_MOVIE", "PLAY_SERIES"), handlePlayMedia(confExt.Plex))
 
 	srv.Serve()
 }
