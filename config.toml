@@ -2,6 +2,9 @@
 port = 4444
 log_level = 5
 
+#TODO: Use a more efficient way to retrieve the Server URL & token by user configuration
 [plex]
+# URL of the Plex Server
 url = ""
+# Plex User token https://www.plexopedia.com/plex-media-server/general/plex-token/
 token = ""
