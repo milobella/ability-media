@@ -45,6 +45,7 @@ func handlePlayMedia(conf plex.Config) func(*model.Request, *model.Response) {
 			FromInstrument(model.InstrumentKindChromeCast, playMediaAction).
 			Interpret(request)
 		if stopper != nil {
+			logrus.Debug("Didn't find chromecast instrument in the device section of the request")
 			stopper(response)
 			return
 		}
@@ -54,12 +55,14 @@ func handlePlayMedia(conf plex.Config) func(*model.Request, *model.Response) {
 			OverridingNotFoundMsg(model.NLG{Sentence: "Which title do you want to play ?"}).
 			InterpretFirst(request)
 		if stopper != nil {
+			logrus.Debug("Didn't find title entity in the NLU section of the request")
 			stopper(response)
 			return
 		}
 
 		url, titleFound, err := plex.Search(conf, *title)
 		if err != nil {
+			logrus.WithError(err).Error("Plex error")
 			response.Nlg.Sentence = "An error occurred while trying to search a media."
 			return
 		}
