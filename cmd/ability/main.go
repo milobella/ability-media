@@ -7,6 +7,7 @@ import (
 	"github.com/milobella/ability-sdk-go/pkg/server"
 	"github.com/milobella/ability-sdk-go/pkg/server/conditions"
 	"github.com/milobella/ability-sdk-go/pkg/server/interpreters"
+	"github.com/sirupsen/logrus"
 )
 
 const titleEntity = "title"
