@@ -256,10 +256,10 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/matttproud/golang_protobuf_extensions v1.0.1 h1:4hp9jkHxhMHkqkrB3Ix0jegS5sx/RkqARlsWZ6pIwiU=
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
-github.com/milobella/ability-sdk-go v0.9.1 h1:l09emESKaivhTvw71d75MFlQuCXvURZNjq0Scr4IPw4=
-github.com/milobella/ability-sdk-go v0.9.1/go.mod h1:2+0/38bI23ql4R1hbxr/bph9Mnxms4AQAXBRQM9ayno=
-github.com/milobella/oratio v1.4.4 h1:HTumC1SLAU1+mqkKJKyfXFMLlTvlaBLAJApOcz9RPKM=
-github.com/milobella/oratio v1.4.4/go.mod h1:moqotaPFw3+wbMY3Rj50+uthSKXQSZuJMns1ynlYgq4=
+github.com/milobella/ability-sdk-go v0.10.0 h1:tupE8xtx1J97oN3z/BfeB0zhAx4m2UwdDzsVHunmf64=
+github.com/milobella/ability-sdk-go v0.10.0/go.mod h1:ebtps3XDHvMTvmzdWnUWtCanDnQAjTNQ0N4cJNWHDss=
+github.com/milobella/oratio v1.4.5 h1:YEDdNfHFPJAPThnDUdLjBjuyjiw05HfbvXDeJrJt9dQ=
+github.com/milobella/oratio v1.4.5/go.mod h1:g8eU3WNDMN74LN5GgmYuNTSH95yh9CUJdEQkfZyDbEI=
 github.com/mitchellh/cli v1.0.0/go.mod h1:hNIlj7HEI86fIcpObd7a0FcrxTWetlwJDGcceTlRvqc=
 github.com/mitchellh/go-homedir v1.0.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
