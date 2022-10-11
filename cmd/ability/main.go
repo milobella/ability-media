@@ -91,6 +91,12 @@ func handlePlayMedia(conf plex.Config) func(*model.Request, *model.Response) {
 				Params: []model.ActionParameter{{
 					Key:   "instrument",
 					Value: *instrument,
+				}, {
+					Key:   "kind",
+					Value: string(model.InstrumentKindChromeCast),
+				}, {
+					Key:   "url",
+					Value: url,
 				}},
 			}}
 			return
