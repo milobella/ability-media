@@ -10,8 +10,12 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const titleEntity = "title"
-const playMediaAction = "play_media"
+const (
+	titleEntity     = "title"
+	playMediaAction = "play_media"
+	playAction      = "play"
+	pauseAction     = "pause"
+)
 
 // ConfigExtension of the SDK configuration
 type ConfigExtension struct {
@@ -27,13 +31,48 @@ func main() {
 
 	// Register first the conditions on actions because they have priority on intents.
 	// The condition returns true if an action is pending.
+	srv.Register(conditions.IfInSlotFilling(playAction), handlePlayPause(playAction))
+	srv.Register(conditions.IfInSlotFilling(pauseAction), handlePlayPause(pauseAction))
 	srv.Register(conditions.IfInSlotFilling(playMediaAction), handlePlayMedia(confExt.Plex))
 
 	// Then we register intents routing rules.
 	// It means that if no pending action has been found in the context, we'll use intent to decide the handler.
+	srv.Register(conditions.IfIntents("CHROME_CAST_PLAY", "PLAY"), handlePlayPause(playAction))
+	srv.Register(conditions.IfIntents("CHROME_CAST_PAUSE", "PAUSE"), handlePlayPause(pauseAction))
 	srv.Register(conditions.IfIntents("PLAY_MOVIE", "PLAY_SERIES"), handlePlayMedia(confExt.Plex))
 
 	srv.Serve()
+}
+
+func handlePlayPause(action string) func(*model.Request, *model.Response) {
+	return func(request *model.Request, response *model.Response) {
+		instrument, stopper := interpreters.FromInstrument(model.InstrumentKindChromeCast, action).Interpret(request)
+		if stopper != nil {
+			stopper(response)
+			return
+		}
+
+		response.Nlg.Sentence = "Executing the action {{ action }} on the chrome cast {{ instrument }}."
+		response.Nlg.Params = []model.NLGParam{{
+			Name:  "action",
+			Value: action,
+			Type:  "string",
+		}, {
+			Name:  "instrument",
+			Value: instrument,
+			Type:  "string",
+		}}
+		response.Actions = []model.Action{{
+			Identifier: action,
+			Params: []model.ActionParameter{{
+				Key:   "instrument",
+				Value: *instrument,
+			}, {
+				Key:   "kind",
+				Value: string(model.InstrumentKindChromeCast),
+			}},
+		}}
+	}
 }
 
 func handlePlayMedia(conf plex.Config) func(*model.Request, *model.Response) {
