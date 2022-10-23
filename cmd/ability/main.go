@@ -46,7 +46,9 @@ func main() {
 
 func handlePlayPause(action string) func(*model.Request, *model.Response) {
 	return func(request *model.Request, response *model.Response) {
-		instrument, stopper := interpreters.FromInstrument(model.InstrumentKindChromeCast, action).Interpret(request)
+		instrument, stopper := interpreters.FromInstrument(model.InstrumentKindChromeCast, action).
+			WithPredicate(func(instrument model.Instrument) bool { return instrument.IsActive() }).
+			Interpret(request)
 		if stopper != nil {
 			stopper(response)
 			return
